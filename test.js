@@ -7,6 +7,7 @@ var chatStatus = true
 
 var simplesqlconn = function(table, key){
     //connects to db and retrives data using the key from the given table
+    //There is a version of this in java currently
 }
 
 
