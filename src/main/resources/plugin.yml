@@ -1,0 +1,27 @@
+name: Nhplugin
+version: ${project.version}
+main: me.bdx.nhplugin.Nhplugin
+api-version: 1.16
+
+commands:
+  newTicket:
+    description: this opens a new ticket using the nashorn system
+    usage: /<command>
+
+  js:
+    description: use one of the javascript commands
+    usage: /<command> <name> <args>
+    aliases: [javascript]
+
+  registercommand:
+    description: dev
+    usage: /<command> <name>
+    aliases: [rc]
+
+permissions:
+  nh.*:
+    children:
+      nh.cmd: true
+      nh.nt: true
+      nh.js: false
+      nh.registercommands: false
