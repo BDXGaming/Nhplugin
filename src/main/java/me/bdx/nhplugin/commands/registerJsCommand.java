@@ -1,8 +1,6 @@
 package me.bdx.nhplugin.commands;
 
-import me.bdx.nhplugin.Nhplugin;
-import me.bdx.nhplugin.registerCommand;
-import org.bukkit.Bukkit;
+import me.bdx.nhplugin.files.registerCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

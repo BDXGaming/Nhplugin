@@ -1,0 +1,7 @@
+#Nhplugin Config
+#This plugin was developed by BDX (GitHub: BDXGaming) (Spigot: BDX_)
+#This plugin serves as a bridge between the Spigot/Bukkit api and the Nashorn Scripting engine
+#This plugin has no intended features other than passing commands and events to the given js file
+
+#The Javascript entrypoint file (Needs to be in the same folder as your spigot jar)
+fileName: test.js

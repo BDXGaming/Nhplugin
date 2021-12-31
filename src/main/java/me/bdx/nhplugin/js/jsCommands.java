@@ -1,4 +1,4 @@
-package me.bdx.nhplugin;
+package me.bdx.nhplugin.js;
 
 import me.bdx.nhplugin.files.parseIntoJs;
 import org.bukkit.Bukkit;
@@ -33,31 +33,12 @@ public class jsCommands extends BukkitCommand {
             return true;
         }
 
-        Player player = null;
-        player = (Player) sender;
-        player.teleport(player.getLocation());
+        Player player = (Player) sender;
 
         if (sender.hasPermission("nh.cmd")) {
-//            ScriptEngineFactory sef = new org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory();
-//            ScriptEngine engine = sef.getScriptEngine();
-//            try {
-//                engine.eval(new FileReader("test.js"));
-//            } catch (ScriptException | FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//
-//            Invocable invocable = (Invocable) engine;
-//            Object result = null;
-//            try {
-//                invocable.invokeFunction(label, player, label, args);
-//            } catch (ScriptException e) {
-//                e.printStackTrace();
-//            } catch (NoSuchMethodException e) {
-//                System.out.println("No such function exists");
-//            }
+
             parseIntoJs.JSParseCommand(label, player, args, label);
             return true;
-
 
         } else {
             return false;

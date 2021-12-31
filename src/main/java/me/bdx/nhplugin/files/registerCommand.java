@@ -1,10 +1,10 @@
-package me.bdx.nhplugin;
+package me.bdx.nhplugin.files;
 
 import java.util.ArrayList;
 import java.util.List;
-import me.bdx.nhplugin.Ticket;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Scoreboard;
+
+import me.bdx.nhplugin.Nhplugin;
+import me.bdx.nhplugin.js.jsCommands;
 
 public class registerCommand {
 

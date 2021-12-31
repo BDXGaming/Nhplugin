@@ -3,13 +3,13 @@ package me.bdx.nhplugin;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import me.bdx.managerapi.Managerapi;
+import me.bdx.nhplugin.commands.Nhcommand;
 import me.bdx.nhplugin.commands.dummyCommand;
 import me.bdx.nhplugin.commands.registerJsCommand;
 import me.bdx.nhplugin.events.bungeeReceiveEvent;
 import me.bdx.nhplugin.events.nhevents;
 import me.bdx.nhplugin.events.playerChatEvent;
-import me.bdx.nhplugin.files.DataQueue;
-import me.bdx.nhplugin.files.parseIntoJs;
+import me.bdx.nhplugin.files.*;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
@@ -18,7 +18,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
-
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -32,6 +31,8 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
     private DataQueue dataQueue;
     public static Chat chat;
     public static Managerapi managerapi;
+    private NhpluginConfig nhpluginConfig;
+    public static configController configcontroller;
 
     public static void registerFakeCommand(Command whatCommand, Plugin plugin)
             throws ReflectiveOperationException {
@@ -55,26 +56,38 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
         // Plugin startup logic
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN +" Starting up");
 
-        dataQueue = new DataQueue();
         //sets the instance
         instance= this;
 
+        //Sets up the config
+        NhpluginConfig.setup();
+
+        //Creates the Data Queue
+        dataQueue = new DataQueue();
+
+        //Creates the controller for all config values
+        configcontroller = new configController();
+
+        //Gets the instance of Vault chat
         RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
         if (rsp != null) {
             chat = rsp.getProvider();
         }
 
+        //Gets the instance of ManangerAPI
         Plugin managerapiPlugin = getServer().getPluginManager().getPlugin("Managerapi");
         managerapi = (Managerapi) managerapiPlugin;
 
+        //Registers BungeeCord Channels
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 
+        //Sets command executors
         getCommand("js").setExecutor(new Nhcommand());
-        getCommand("newTicket").setExecutor(new nhnewticket());
         getCommand("registercommand").setExecutor(new registerJsCommand());
         getCommand("dummycommand").setExecutor(new dummyCommand());
 
+        //Resisters event listeners
         getServer().getPluginManager().registerEvents(new nhevents(), this);
         getServer().getPluginManager().registerEvents(new playerChatEvent(), this);
 
@@ -90,7 +103,7 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
                     if (sender.hasPermission("nh.cmd")) {
                         ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
                         try {
-                            engine.eval(new FileReader("test.js"));
+                            engine.eval(new FileReader(Nhplugin.configcontroller.JS_ENTRY_FILE));
                         } catch (ScriptException | FileNotFoundException e) {
                             e.printStackTrace();
                         }
@@ -138,10 +151,11 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
         return instance;
     }
 
+    //This is used to get the data queue where JS can store data which can be referenced later
     public DataQueue getDataQueue(){
         return dataQueue;
     }
-
+    public NhpluginConfig getConfigManger(){return nhpluginConfig; }
 
 
 }

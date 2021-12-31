@@ -18,7 +18,7 @@ public class parseIntoJs {
         ScriptEngineFactory sef = new org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory();
         ScriptEngine engine = sef.getScriptEngine();
         try {
-            engine.eval(new FileReader("test.js"));
+            engine.eval(new FileReader(Nhplugin.configcontroller.JS_ENTRY_FILE));
         } catch (ScriptException | FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -37,7 +37,7 @@ public class parseIntoJs {
         ScriptEngineFactory sef = new NashornScriptEngineFactory();
         ScriptEngine engine = sef.getScriptEngine();
         try {
-            engine.eval(new FileReader("test.js"));
+            engine.eval(new FileReader(Nhplugin.configcontroller.JS_ENTRY_FILE));
         } catch (ScriptException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
