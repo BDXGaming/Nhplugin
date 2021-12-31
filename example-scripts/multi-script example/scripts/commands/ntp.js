@@ -21,8 +21,6 @@ function ntp(sender, cmd, args, managerapi, event, nhplugin){
             sender.sendMessage(ChatColor.GOLD + "Teleported to "+ ChatColor.RED + user)
             sender.sendPluginMessage(nhplugin, "BungeeCord", out.toByteArray());
             managerapi.getChatapi().sendCustomPacket("minecraft:tp "+sender.getName() +" "+ user);
-            
-            //addJoinQueue(user, ["minecraft:tp "+user+" "+sender.getName()], nhplugin)
         }
     }else{
         sender.sendMessage(ChatColor.RED + permissionErrorMessage)

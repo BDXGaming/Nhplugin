@@ -17,8 +17,8 @@ var StringUtil = Java.type("org.bukkit.util.StringUtil")
 var Collections = Java.type("java.util.Collections")
 
 //Constanstants defined in JS
-var serverName = "build"
-var bungeeServerName = "build"
+var serverName = "server display name"
+var bungeeServerName = "server-name"
 var chatStatus = false
 var permissionErrorMessage = "You do not have the required permission to use this command!"
 
@@ -27,25 +27,6 @@ var permissionErrorMessage = "You do not have the required permission to use thi
 function stringToCommand(message){
     var command = message.substring(1, message.length)
     return command.split(" ")
-}
-
-
-var simplesqlconn = function(table, key){
-    //connects to db and retrives data using the key from the given table
-}
-
-var readFromConfig = function(value){
-
-}
-
-var reload = function(sender, cmd, args, managerapi, nh){
-    var aliases = new ArrayList();
-
-    aliases.add("command")
-    aliases.add("thing")
-
-    nh.getCommand("dummycommand").setAliases(aliases)
-    sender.sendMessage("updated")
 }
 
 var test = function(sender, cmd, args, chat, ma){
@@ -150,20 +131,6 @@ var kick = function(sender, cmd, args){
         }
     else{
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&','&4You do not have the perms to use this command!'))
-    }
-}
-
-
-var testhelp = function(sender,cmd,args){
-    if(sender.hasPermission("nh.dev")){
-        var cm = Bukkit.getServer().getClass().getDeclaredField("commandMap")
-        cm.setAccessible(true)
-        var ev = Java.extend(JavaPlugin, {
-            registerCommand:function() {
-               getCommand("thing").setExecutor(testhelp)
-            }
-        })
-        cm.register("somenewcommand", ev )
     }
 }
 

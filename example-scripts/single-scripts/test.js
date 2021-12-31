@@ -114,20 +114,6 @@ var kick = function(sender, cmd, args){
     }
 }
 
-
-var testhelp = function(sender,cmd,args){
-    if(sender.hasPermission("nh.dev")){
-        var cm = Bukkit.getServer().getClass().getDeclaredField("commandMap")
-        cm.setAccessible(true)
-        var ev = Java.extend(JavaPlugin, {
-            registerCommand:function() {
-               getCommand("thing").setExecutor(testhelp)
-            }
-        })
-        cm.register("somenewcommand", ev )
-    }
-}
-
 var OnPlayerJoinEvent = function(event){
 
     var player = event.getPlayer()
@@ -168,20 +154,6 @@ var OnPlayerChatEvent = function(event){
             var player = online[i]
             player.sendMessage("This works")
         }
-    }
-}
-
-var chatoff = function(sender, cmd, args){
-    if(sender.hasPermission("nh.chatlock.enable")){
-        chatStatus = false
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&',"&cChat has been disabled!"))
-    }
-}
-
-var chaton = function(sender, cmd,args){
-    if (sender.hasPermission("nh.chatlock.disable")){
-        chatStatus = true
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&',"&aChat has been enabled!"))
     }
 }
 
