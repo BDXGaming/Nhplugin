@@ -3,6 +3,8 @@ package me.bdx.nhplugin;
 import java.util.ArrayList;
 import java.util.List;
 import me.bdx.nhplugin.Ticket;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Scoreboard;
 
 public class registerCommand {
 
@@ -11,7 +13,7 @@ public class registerCommand {
     public static void addComamnd(String name) {
         try {
             List<String> aliases = new ArrayList<String>();
-            Nhplugin.registerFakeCommand(new jsCommands("none", name, "none", "/<command> <args>", aliases), Nhplugin.getInstance());
+            Nhplugin.registerFakeCommand(new jsCommands("none", name, "A Test Command", "/<command> <args>", aliases), Nhplugin.getInstance());
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
@@ -30,5 +32,4 @@ public class registerCommand {
     public static ArrayList<String> getCommandList(){
         return commands;
     }
-
 }

@@ -18,6 +18,16 @@ commands:
     usage: /<command> <name>
     aliases: [rc]
 
+  dummycommand:
+    description: the base command
+    usage: /<command>
+    aliases:
+      - testing
+      - ntp
+      - ntphere
+      - server
+      - send
+
 permissions:
   nh.*:
     children:

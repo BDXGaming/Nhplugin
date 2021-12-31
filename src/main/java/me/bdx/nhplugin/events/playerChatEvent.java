@@ -1,35 +1,28 @@
 package me.bdx.nhplugin.events;
 
+import me.bdx.managerapi.Managerapi;
+import me.bdx.managerapi.customEvents.GlobalChatEvent;
+import me.bdx.nhplugin.Nhplugin;
+import me.bdx.nhplugin.files.parseIntoJs;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.command.CommandMap;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import javax.script.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 public class playerChatEvent implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public static void onPlayerChat(AsyncPlayerChatEvent event){
-        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-        try {
-            engine.eval(new FileReader("test.js"));
-        } catch (ScriptException | FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        Invocable invocable = (Invocable) engine;
-        Object result = null;
-        try {
-            invocable.invokeFunction("OnPlayerChatEvent", event);
-        } catch (ScriptException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            int i =0;
-        }
+        parseIntoJs.JSParseEvent(event);
     }
 }

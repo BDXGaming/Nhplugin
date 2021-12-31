@@ -1,13 +1,24 @@
 package me.bdx.nhplugin;
 
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteStreams;
+import me.bdx.managerapi.Managerapi;
+import me.bdx.nhplugin.commands.dummyCommand;
 import me.bdx.nhplugin.commands.registerJsCommand;
+import me.bdx.nhplugin.events.bungeeReceiveEvent;
 import me.bdx.nhplugin.events.nhevents;
 import me.bdx.nhplugin.events.playerChatEvent;
+import me.bdx.nhplugin.files.DataQueue;
+import me.bdx.nhplugin.files.parseIntoJs;
+import net.milkbowl.vault.chat.Chat;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
+
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -16,8 +27,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Method;
 
-public final class Nhplugin extends JavaPlugin {
+public final class Nhplugin extends JavaPlugin implements PluginMessageListener {
     private static JavaPlugin instance;
+    private DataQueue dataQueue;
+    public static Chat chat;
+    public static Managerapi managerapi;
 
     public static void registerFakeCommand(Command whatCommand, Plugin plugin)
             throws ReflectiveOperationException {
@@ -33,6 +47,7 @@ public final class Nhplugin extends JavaPlugin {
 
         //Registering the command provided above
         register.invoke(cmdmap, whatCommand.getName(),whatCommand);
+
     }
 
     @Override
@@ -40,12 +55,26 @@ public final class Nhplugin extends JavaPlugin {
         // Plugin startup logic
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN +" Starting up");
 
+        dataQueue = new DataQueue();
         //sets the instance
         instance= this;
+
+        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
+        if (rsp != null) {
+            chat = rsp.getProvider();
+        }
+
+        Plugin managerapiPlugin = getServer().getPluginManager().getPlugin("Managerapi");
+        managerapi = (Managerapi) managerapiPlugin;
+
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 
         getCommand("js").setExecutor(new Nhcommand());
         getCommand("newTicket").setExecutor(new nhnewticket());
         getCommand("registercommand").setExecutor(new registerJsCommand());
+        getCommand("dummycommand").setExecutor(new dummyCommand());
+
         getServer().getPluginManager().registerEvents(new nhevents(), this);
         getServer().getPluginManager().registerEvents(new playerChatEvent(), this);
 
@@ -87,8 +116,30 @@ public final class Nhplugin extends JavaPlugin {
         return true;
     }
 
+    @Override
+    public void onDisable() {
+        // Plugin shutdown logic
+        this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
+        this.getServer().getMessenger().unregisterIncomingPluginChannel(this);
+    }
+
+    @Override
+    public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+        if (!channel.equals("BungeeCord")) {
+            return;
+        }
+        ByteArrayDataInput in = ByteStreams.newDataInput(message);
+        String subchannel = in.readUTF();
+        bungeeReceiveEvent event = new bungeeReceiveEvent(subchannel, in);
+        parseIntoJs.JSParseEvent(event);
+    }
+
     public static JavaPlugin getInstance() {
         return instance;
+    }
+
+    public DataQueue getDataQueue(){
+        return dataQueue;
     }
 
 

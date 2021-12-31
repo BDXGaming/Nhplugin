@@ -1,5 +1,7 @@
 package me.bdx.nhplugin;
 
+import me.bdx.nhplugin.files.parseIntoJs;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -7,10 +9,7 @@ import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import javax.script.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Method;
@@ -36,24 +35,27 @@ public class jsCommands extends BukkitCommand {
 
         Player player = null;
         player = (Player) sender;
+        player.teleport(player.getLocation());
 
         if (sender.hasPermission("nh.cmd")) {
-            ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-            try {
-                engine.eval(new FileReader("test.js"));
-            } catch (ScriptException | FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            Invocable invocable = (Invocable) engine;
-            Object result = null;
-            try {
-                invocable.invokeFunction(label, player, label, args);
-            } catch (ScriptException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                System.out.println("No such function exists");
-            }
+//            ScriptEngineFactory sef = new org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory();
+//            ScriptEngine engine = sef.getScriptEngine();
+//            try {
+//                engine.eval(new FileReader("test.js"));
+//            } catch (ScriptException | FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//
+//            Invocable invocable = (Invocable) engine;
+//            Object result = null;
+//            try {
+//                invocable.invokeFunction(label, player, label, args);
+//            } catch (ScriptException e) {
+//                e.printStackTrace();
+//            } catch (NoSuchMethodException e) {
+//                System.out.println("No such function exists");
+//            }
+            parseIntoJs.JSParseCommand(label, player, args, label);
             return true;
 
 
