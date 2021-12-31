@@ -1,4 +1,4 @@
-# Nhplugin (Test Project)
+# Nhplugin (Test Plugin)
 
 ## Goal
 The goal of this plugin was to allow for the use of the Nashorn engine in minecraft 1.17+ with the inclusion of the standalone engine. Additionally the goal of the plugin
