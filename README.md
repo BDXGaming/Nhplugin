@@ -12,3 +12,6 @@ Currently the plugin depends on Vault, ManagerAPI (Another of my plugins)
 
 ## Future Support
 I do not have any fixed plans on supporting/improving this plugin. It is merely a project that I work on when I have free time.
+
+## Examples
+The single-script example does not fully work as I changed the way in which events are called from Java. However the premise is the same and events can be easily checked by getting the event name.
