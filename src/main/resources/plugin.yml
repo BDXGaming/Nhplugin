@@ -26,6 +26,10 @@ commands:
       - server
       - send
 
+  reloadscripts:
+    description: Reloads the current scripts
+    usage: /<command>
+
 permissions:
   nh.*:
     children:
@@ -33,3 +37,4 @@ permissions:
       nh.nt: true
       nh.js: false
       nh.registercommands: false
+      nh.reloadscripts: true

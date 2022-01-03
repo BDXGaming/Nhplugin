@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
-
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
@@ -18,8 +17,35 @@ public class parseIntoJs {
     private static ScriptEngine engine;
     private static Invocable invocable;
 
+    /**
+     * When invoked this method gets and loads the Nashorn script engine
+     */
     public static void start(){
-        ScriptEngineFactory sef = new org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory();
+
+        ScriptEngineFactory sef = new  NashornScriptEngineFactory();
+        engine = sef.getScriptEngine();
+        try {
+            engine.eval(new FileReader(Nhplugin.configcontroller.JS_ENTRY_FILE));
+        } catch (ScriptException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        invocable = (Invocable) engine;
+
+        //Reloads the scripts once per minute to ensure that they are up to date (runs async as to prevent lagging the rest of the server)
+        new BukkitRunnable(){
+            @Override
+            public void run(){
+                reload();
+            }
+        }.runTaskTimerAsynchronously(Nhplugin.getInstance(), 1, 1200);
+
+    }
+
+    /**
+     * When invoked this method refreshes both the instance of Nashorn and the scripts which are being evaluated
+     */
+    public static void reload(){
+        ScriptEngineFactory sef = new NashornScriptEngineFactory();
         engine = sef.getScriptEngine();
         try {
             engine.eval(new FileReader(Nhplugin.configcontroller.JS_ENTRY_FILE));
@@ -29,6 +55,7 @@ public class parseIntoJs {
         invocable = (Invocable) engine;
     }
 
+
     public static void JSParseCommand(String meth, Player sender, String[] args, String cmd){
 
         try {
@@ -36,7 +63,7 @@ public class parseIntoJs {
         } catch (ScriptException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
-            System.out.println("No such function exists");
+            Bukkit.getLogger().warning("No such function exists");
         }
 
     }

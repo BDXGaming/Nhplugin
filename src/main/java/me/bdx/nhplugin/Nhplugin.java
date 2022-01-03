@@ -3,9 +3,11 @@ package me.bdx.nhplugin;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import me.bdx.managerapi.Managerapi;
+import me.bdx.managerapi.commands.reloadCommand;
 import me.bdx.nhplugin.commands.Nhcommand;
 import me.bdx.nhplugin.commands.dummyCommand;
 import me.bdx.nhplugin.commands.registerJsCommand;
+import me.bdx.nhplugin.commands.reloadScriptsCommand;
 import me.bdx.nhplugin.events.bungeeReceiveEvent;
 import me.bdx.nhplugin.events.nhevents;
 import me.bdx.nhplugin.events.playerChatEvent;
@@ -89,6 +91,7 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
         getCommand("js").setExecutor(new Nhcommand());
         getCommand("registercommand").setExecutor(new registerJsCommand());
         getCommand("dummycommand").setExecutor(new dummyCommand());
+        getCommand("reloadscripts").setExecutor(new reloadScriptsCommand());
 
         //Resisters event listeners
         getServer().getPluginManager().registerEvents(new nhevents(), this);
