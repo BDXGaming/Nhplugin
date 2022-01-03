@@ -55,6 +55,10 @@ public class parseIntoJs {
         invocable = (Invocable) engine;
     }
 
+    public static Invocable getInvocable(){
+        return invocable;
+    }
+
 
     public static void JSParseCommand(String meth, Player sender, String[] args, String cmd){
 
