@@ -1,8 +1,10 @@
 package me.bdx.nhplugin.files;
 
 import me.bdx.nhplugin.Nhplugin;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
 import javax.script.Invocable;
@@ -13,16 +15,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class parseIntoJs {
+    private static ScriptEngine engine;
+    private static Invocable invocable;
 
-    public static void JSParseCommand(String meth, Player sender, String[] args, String cmd){
+    public static void start(){
         ScriptEngineFactory sef = new org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory();
-        ScriptEngine engine = sef.getScriptEngine();
+        engine = sef.getScriptEngine();
         try {
             engine.eval(new FileReader(Nhplugin.configcontroller.JS_ENTRY_FILE));
         } catch (ScriptException | FileNotFoundException e) {
             e.printStackTrace();
         }
-        Invocable invocable = (Invocable) engine;
+        invocable = (Invocable) engine;
+    }
+
+    public static void JSParseCommand(String meth, Player sender, String[] args, String cmd){
+
         try {
             invocable.invokeFunction(meth, sender, meth, args, Nhplugin.chat, Nhplugin.managerapi, Nhplugin.getInstance());
         } catch (ScriptException e) {
@@ -34,18 +42,7 @@ public class parseIntoJs {
     }
 
     public static void JSParseEvent(Event event){
-        ScriptEngineFactory sef = new NashornScriptEngineFactory();
-        ScriptEngine engine = sef.getScriptEngine();
-        try {
-            engine.eval(new FileReader(Nhplugin.configcontroller.JS_ENTRY_FILE));
-        } catch (ScriptException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
-        Invocable invocable = (Invocable) engine;
-        Object result = null;
         try {
             invocable.invokeFunction("onEvent", event, Nhplugin.managerapi, Nhplugin.getInstance());
         } catch (ScriptException e) {

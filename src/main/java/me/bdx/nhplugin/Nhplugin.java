@@ -68,6 +68,9 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
         //Creates the controller for all config values
         configcontroller = new configController();
 
+        //Starts the scriptloader
+        parseIntoJs.start();
+
         //Gets the instance of Vault chat
         RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
         if (rsp != null) {
