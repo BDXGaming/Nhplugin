@@ -6,7 +6,6 @@ import me.bdx.managerapi.customEvents.customPacketReceiveEvent;
 import me.bdx.managerapi.customEvents.globalChatReceiveEvent;
 import me.bdx.nhplugin.Nhplugin;
 import me.bdx.nhplugin.files.parseIntoJs;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -30,7 +29,6 @@ public class nhevents implements Listener {
 
     @EventHandler
     public static void PlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event){
-
         try {
             parseIntoJs.getInvocable().invokeFunction("OnPlayerCommandProcess", event, Nhplugin.chat, Nhplugin.managerapi, Nhplugin.getInstance());
         } catch (ScriptException e) {
@@ -92,4 +90,12 @@ public class nhevents implements Listener {
         parseIntoJs.JSParseEvent(event);
     }
 
+    @EventHandler
+    public static void PlayerClickEvent(PlayerInteractEvent event){
+        parseIntoJs.JSParseEvent(event);
+    }
+
+
 }
+
+
