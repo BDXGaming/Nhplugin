@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.bdx.nhplugin.Nhplugin;
-import me.bdx.nhplugin.js.jsCommands;
+import me.bdx.nhplugin.js.JsCommands;
 
 public class registerCommand {
 
@@ -13,7 +13,7 @@ public class registerCommand {
     public static void addComamnd(String name) {
         try {
             List<String> aliases = new ArrayList<String>();
-            Nhplugin.registerFakeCommand(new jsCommands("none", name, "A Test Command", "/<command> <args>", aliases), Nhplugin.getInstance());
+            Nhplugin.registerFakeCommand(new JsCommands("none", name, "A Test Command", "/<command> <args>", aliases), Nhplugin.getInstance());
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }

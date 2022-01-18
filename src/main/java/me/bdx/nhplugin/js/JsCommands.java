@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class jsCommands extends BukkitCommand {
+public class JsCommands extends BukkitCommand {
 
-    public jsCommands(String perm, String name, String des, String usage, List<String> aliases){
+    public JsCommands(String perm, String name, String des, String usage, List<String> aliases){
         super(name, des, usage, aliases);
         if(!(perm.equals("none"))) {
             this.setPermission(perm);
