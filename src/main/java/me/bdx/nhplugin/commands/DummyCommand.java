@@ -4,7 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class dummyCommand implements CommandExecutor {
+public class DummyCommand implements CommandExecutor {
 
     /**
      * This command serves as an empty command which can be called without any result. This command has multiple aliases

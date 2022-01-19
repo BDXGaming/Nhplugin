@@ -1,20 +1,10 @@
 package me.bdx.nhplugin.js;
 
-import me.bdx.nhplugin.files.parseIntoJs;
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
+import me.bdx.nhplugin.files.ParseIntoJs;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
-import javax.script.*;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class JsCommands extends BukkitCommand {
@@ -37,7 +27,7 @@ public class JsCommands extends BukkitCommand {
 
         if (sender.hasPermission("nh.cmd")) {
 
-            parseIntoJs.JSParseCommand(label, player, args, label);
+            ParseIntoJs.JSParseCommand(label, player, args, label);
             return true;
 
         } else {

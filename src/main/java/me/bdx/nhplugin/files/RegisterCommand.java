@@ -6,7 +6,7 @@ import java.util.List;
 import me.bdx.nhplugin.Nhplugin;
 import me.bdx.nhplugin.js.JsCommands;
 
-public class registerCommand {
+public class RegisterCommand {
 
     private static ArrayList<String> commands= new ArrayList<>();
 

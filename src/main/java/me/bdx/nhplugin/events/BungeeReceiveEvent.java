@@ -4,13 +4,13 @@ import com.google.common.io.ByteArrayDataInput;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class bungeeReceiveEvent extends Event {
+public class BungeeReceiveEvent extends Event {
     private String subchannel;
     private ByteArrayDataInput in;
     private static final HandlerList HANDLERS = new HandlerList();
 
 
-    public bungeeReceiveEvent(String subchannel, ByteArrayDataInput in){
+    public BungeeReceiveEvent(String subchannel, ByteArrayDataInput in){
         this.subchannel = subchannel;
         this.in = in;
     }

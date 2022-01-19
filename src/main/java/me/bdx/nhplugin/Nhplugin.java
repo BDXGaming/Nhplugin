@@ -3,14 +3,13 @@ package me.bdx.nhplugin;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import me.bdx.managerapi.Managerapi;
-import me.bdx.managerapi.commands.reloadCommand;
 import me.bdx.nhplugin.commands.Nhcommand;
-import me.bdx.nhplugin.commands.dummyCommand;
-import me.bdx.nhplugin.commands.registerJsCommand;
-import me.bdx.nhplugin.commands.reloadScriptsCommand;
-import me.bdx.nhplugin.events.bungeeReceiveEvent;
-import me.bdx.nhplugin.events.nhevents;
-import me.bdx.nhplugin.events.playerChatEvent;
+import me.bdx.nhplugin.commands.DummyCommand;
+import me.bdx.nhplugin.commands.RegisterJsCommand;
+import me.bdx.nhplugin.commands.ReloadScriptsCommand;
+import me.bdx.nhplugin.events.BungeeReceiveEvent;
+import me.bdx.nhplugin.events.Nhevents;
+import me.bdx.nhplugin.events.PlayerChatEvent;
 import me.bdx.nhplugin.files.*;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.ChatColor;
@@ -34,7 +33,7 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
     public static Chat chat;
     public static Managerapi managerapi;
     private NhpluginConfig nhpluginConfig;
-    public static configController configcontroller;
+    public static ConfigController configcontroller;
 
     public static void registerFakeCommand(Command whatCommand, Plugin plugin)
             throws ReflectiveOperationException {
@@ -68,10 +67,10 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
         dataQueue = new DataQueue();
 
         //Creates the controller for all config values
-        configcontroller = new configController();
+        configcontroller = new ConfigController();
 
         //Starts the scriptloader
-        parseIntoJs.start();
+        ParseIntoJs.start();
 
         //Gets the instance of Vault chat
         RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
@@ -89,20 +88,20 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
 
         //Sets command executors
         getCommand("js").setExecutor(new Nhcommand());
-        getCommand("registercommand").setExecutor(new registerJsCommand());
-        getCommand("dummycommand").setExecutor(new dummyCommand());
-        getCommand("reloadscripts").setExecutor(new reloadScriptsCommand());
+        getCommand("registercommand").setExecutor(new RegisterJsCommand());
+        getCommand("dummycommand").setExecutor(new DummyCommand());
+        getCommand("reloadscripts").setExecutor(new ReloadScriptsCommand());
 
         //Resisters event listeners
-        getServer().getPluginManager().registerEvents(new nhevents(), this);
-        getServer().getPluginManager().registerEvents(new playerChatEvent(), this);
+        getServer().getPluginManager().registerEvents(new Nhevents(), this);
+        getServer().getPluginManager().registerEvents(new PlayerChatEvent(), this);
 
     }
 
     @Override
     public boolean onCommand(CommandSender sender,Command command, String label,String[] args){
         if(sender instanceof Player){
-            for (String name: registerCommand.getCommandList()){
+            for (String name: RegisterCommand.getCommandList()){
                 if (command.getName().equalsIgnoreCase(name)){
                     Player player = (Player) sender;
 
@@ -149,8 +148,8 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
         }
         ByteArrayDataInput in = ByteStreams.newDataInput(message);
         String subchannel = in.readUTF();
-        bungeeReceiveEvent event = new bungeeReceiveEvent(subchannel, in);
-        parseIntoJs.JSParseEvent(event);
+        BungeeReceiveEvent event = new BungeeReceiveEvent(subchannel, in);
+        ParseIntoJs.JSParseEvent(event);
     }
 
     public static JavaPlugin getInstance() {

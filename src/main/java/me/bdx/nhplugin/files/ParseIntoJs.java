@@ -13,7 +13,7 @@ import javax.script.ScriptException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-public class parseIntoJs {
+public class ParseIntoJs {
     private static ScriptEngine engine;
     private static Invocable invocable;
 

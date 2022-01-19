@@ -1,12 +1,12 @@
 package me.bdx.nhplugin.commands;
 
-import me.bdx.nhplugin.files.registerCommand;
+import me.bdx.nhplugin.files.RegisterCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class registerJsCommand implements CommandExecutor {
+public class RegisterJsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -14,7 +14,7 @@ public class registerJsCommand implements CommandExecutor {
             Player player = (Player) sender;
             if (args.length > 0){
                 if(player.hasPermission("nh.registerCommands")){
-                    registerCommand.addComamnd(args[0]);
+                    RegisterCommand.addComamnd(args[0]);
 
                     return true;
                 }
