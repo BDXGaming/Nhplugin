@@ -8,6 +8,7 @@ import me.bdx.nhplugin.Nhplugin;
 import me.bdx.nhplugin.files.ParseIntoJs;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.player.*;
@@ -81,19 +82,22 @@ public class Nhevents implements Listener {
     }
 
     @EventHandler
-    public static void InventoryClickEvent(InventoryClickEvent event){
+    public static void inventoryClickEvent(InventoryClickEvent event){
         ParseIntoJs.JSParseEvent(event);
     }
 
     @EventHandler
-    public static void InventoryInteractEvent(InventoryInteractEvent event){
+    public static void inventoryInteractEvent(InventoryInteractEvent event){
         ParseIntoJs.JSParseEvent(event);
     }
 
     @EventHandler
-    public static void PlayerClickEvent(PlayerInteractEvent event){
+    public static void playerClickEvent(PlayerInteractEvent event){
         ParseIntoJs.JSParseEvent(event);
     }
+
+    @EventHandler
+    public static void playerDeathEvent(PlayerDeathEvent event){ParseIntoJs.JSParseEvent(event);}
 
 
 }
