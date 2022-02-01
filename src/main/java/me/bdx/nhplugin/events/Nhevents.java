@@ -102,7 +102,8 @@ public class Nhevents implements Listener {
     @EventHandler
     public static void playerDeathEvent(PlayerKickEvent event){ParseIntoJs.JSParseEvent(event);}
 
-
+    @EventHandler
+    public static void playerItemDropEvent(PlayerDropItemEvent event){ParseIntoJs.JSParseEvent(event);}
 }
 
 
