@@ -27,7 +27,7 @@ public class JsCommands extends BukkitCommand {
 
         if (sender.hasPermission("nh.cmd")) {
 
-            ParseIntoJs.JSParseCommand(label, player, args, label);
+            ParseIntoJs.getInstance().JSParseCommand(label, player, args, label);
             return true;
 
         } else {

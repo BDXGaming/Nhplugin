@@ -70,7 +70,7 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
         configcontroller = new ConfigController();
 
         //Starts the scriptloader
-        ParseIntoJs.start();
+        ParseIntoJs.getInstance();
 
         //Gets the instance of Vault chat
         RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
@@ -149,7 +149,7 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
         ByteArrayDataInput in = ByteStreams.newDataInput(message);
         String subchannel = in.readUTF();
         BungeeReceiveEvent event = new BungeeReceiveEvent(subchannel, in);
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     public static JavaPlugin getInstance() {

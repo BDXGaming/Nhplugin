@@ -14,13 +14,26 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class ParseIntoJs {
-    private static ScriptEngine engine;
-    private static Invocable invocable;
+    private ScriptEngine engine;
+    private Invocable invocable;
+    private static ParseIntoJs parseIntoJs;
+
+    private ParseIntoJs(){
+        start();
+    }
+
+    public static ParseIntoJs getInstance(){
+        if(parseIntoJs == null){
+            parseIntoJs = new ParseIntoJs();
+        }
+        return parseIntoJs;
+    }
+
 
     /**
      * When invoked this method gets and loads the Nashorn script engine
      */
-    public static void start(){
+    public void start(){
 
         ScriptEngineFactory sef = new  NashornScriptEngineFactory();
         engine = sef.getScriptEngine();
@@ -44,7 +57,7 @@ public class ParseIntoJs {
     /**
      * When invoked this method refreshes both the instance of Nashorn and the scripts which are being evaluated
      */
-    public static void reload(){
+    public void reload(){
         ScriptEngineFactory sef = new NashornScriptEngineFactory();
         engine = sef.getScriptEngine();
         try {
@@ -55,12 +68,12 @@ public class ParseIntoJs {
         invocable = (Invocable) engine;
     }
 
-    public static Invocable getInvocable(){
+    public Invocable getInvocable(){
         return invocable;
     }
 
 
-    public static void JSParseCommand(String meth, Player sender, String[] args, String cmd){
+    public void JSParseCommand(String meth, Player sender, String[] args, String cmd){
 
         try {
             invocable.invokeFunction(meth, sender, meth, args, Nhplugin.chat, Nhplugin.managerapi, Nhplugin.getInstance());
@@ -72,7 +85,7 @@ public class ParseIntoJs {
 
     }
 
-    public static void JSParseEvent(Event event){
+    public void JSParseEvent(Event event){
 
         try {
             invocable.invokeFunction("onEvent", event, Nhplugin.managerapi, Nhplugin.getInstance());

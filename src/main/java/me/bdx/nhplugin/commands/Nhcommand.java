@@ -19,7 +19,7 @@ public class Nhcommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (sender.hasPermission("nh.cmd")) {
-            ParseIntoJs.JSParseCommand(args[0], player, args, label);
+            ParseIntoJs.getInstance().JSParseCommand(args[0], player, args, label);
             return true;
 
 

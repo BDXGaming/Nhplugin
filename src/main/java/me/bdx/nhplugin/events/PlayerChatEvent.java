@@ -10,6 +10,6 @@ public class PlayerChatEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void onPlayerChat(AsyncPlayerChatEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 }

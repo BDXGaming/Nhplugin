@@ -12,7 +12,7 @@ public class ReloadScriptsCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(sender.hasPermission("nh.reloadscripts")){
-            ParseIntoJs.reload();
+            ParseIntoJs.getInstance().reload();
             sender.sendMessage(ChatColor.GREEN + "Scripts have been reloaded!");
         }
 

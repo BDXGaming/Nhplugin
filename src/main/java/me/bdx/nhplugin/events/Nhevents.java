@@ -20,18 +20,18 @@ public class Nhevents implements Listener {
 
     @EventHandler
     public static void onPlayerJoin(PlayerJoinEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     @EventHandler
     public static void onPlayerQuit(PlayerQuitEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     @EventHandler
     public static void PlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event){
         try {
-            ParseIntoJs.getInvocable().invokeFunction("OnPlayerCommandProcess", event, Nhplugin.chat, Nhplugin.managerapi, Nhplugin.getInstance());
+            ParseIntoJs.getInstance().getInvocable().invokeFunction("OnPlayerCommandProcess", event, Nhplugin.chat, Nhplugin.managerapi, Nhplugin.getInstance());
         } catch (ScriptException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
@@ -43,7 +43,7 @@ public class Nhevents implements Listener {
     public static void ServerCommandEvent(ServerCommandEvent event){
 
         try {
-            ParseIntoJs.getInvocable().invokeFunction("OnServerCommandEvent", event, Nhplugin.chat, Nhplugin.managerapi, Nhplugin.getInstance());
+            ParseIntoJs.getInstance().getInvocable().invokeFunction("OnServerCommandEvent", event, Nhplugin.chat, Nhplugin.managerapi, Nhplugin.getInstance());
         } catch (ScriptException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
@@ -53,57 +53,57 @@ public class Nhevents implements Listener {
 
     @EventHandler
     public static void TabCompleteEvent(TabCompleteEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     @EventHandler
     public static void globalChatEvent(GlobalChatEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     @EventHandler
     public static void playerKickEvent(PlayerKickEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     @EventHandler
     public static void customPacketReceiveEvent(customPacketReceiveEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     @EventHandler
     public static void globalChatReceiveEvent(globalChatReceiveEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     @EventHandler
     public static void altChannelEvent(altChatChannelReceiveEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     @EventHandler
     public static void inventoryClickEvent(InventoryClickEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     @EventHandler
     public static void inventoryInteractEvent(InventoryInteractEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     @EventHandler
     public static void playerClickEvent(PlayerInteractEvent event){
-        ParseIntoJs.JSParseEvent(event);
+        ParseIntoJs.getInstance().JSParseEvent(event);
     }
 
     @EventHandler
-    public static void playerDeathEvent(PlayerDeathEvent event){ParseIntoJs.JSParseEvent(event);}
+    public static void playerDeathEvent(PlayerDeathEvent event){ParseIntoJs.getInstance().JSParseEvent(event);}
 
     @EventHandler
-    public static void playerDeathEvent(PlayerKickEvent event){ParseIntoJs.JSParseEvent(event);}
+    public static void playerDeathEvent(PlayerKickEvent event){ParseIntoJs.getInstance().JSParseEvent(event);}
 
     @EventHandler
-    public static void playerItemDropEvent(PlayerDropItemEvent event){ParseIntoJs.JSParseEvent(event);}
+    public static void playerItemdropEvent(PlayerDropItemEvent event){ParseIntoJs.getInstance().JSParseEvent(event);}
 }
 
 
