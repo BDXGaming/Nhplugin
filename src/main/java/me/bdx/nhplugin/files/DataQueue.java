@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class DataQueue {
 
     private HashMap<String, ArrayList<String>> joinQueue;
+    private HashMap<String, String> generalDataQueue;
 
     public DataQueue(){
         joinQueue = new HashMap<>();
@@ -25,5 +26,13 @@ public class DataQueue {
 
     public void removeJoinQueue(String key){
         joinQueue.remove(key);
+    }
+
+    public HashMap<String, String> getGeneralDataQueue() {
+        return generalDataQueue;
+    }
+
+    public void setGeneralDataQueue(HashMap<String, String> generalDataQueue) {
+        this.generalDataQueue = generalDataQueue;
     }
 }
