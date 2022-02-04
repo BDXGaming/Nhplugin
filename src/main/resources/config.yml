@@ -5,3 +5,9 @@
 
 #The Javascript entrypoint file (Needs to be in the same folder as your spigot jar)
 fileName: test.js
+
+#event handler js file
+eventHandlerFileName: eventHandler.js
+
+#Command handler js file
+commandHandlerFileName: commandHandler.js
