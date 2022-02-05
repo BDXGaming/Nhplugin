@@ -10,6 +10,7 @@ public class DataQueue {
 
     public DataQueue(){
         joinQueue = new HashMap<>();
+        generalDataQueue = new HashMap<>();
     }
 
     public HashMap<String, ArrayList<String>> getJoinQueue(){
@@ -34,5 +35,9 @@ public class DataQueue {
 
     public void setGeneralDataQueue(HashMap<String, String> generalDataQueue) {
         this.generalDataQueue = generalDataQueue;
+    }
+
+    public void addGeneralQueue(String key, String value){
+        generalDataQueue.put(key,value);
     }
 }
