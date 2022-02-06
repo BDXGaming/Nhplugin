@@ -22,6 +22,10 @@ public class ParseIntoJs {
         start();
     }
 
+    /**
+     * Gets the instance of the ParseIntoJs class
+     * @return instance of class
+     */
     public static ParseIntoJs getInstance(){
         if(parseIntoJs == null){
             parseIntoJs = new ParseIntoJs();
@@ -68,11 +72,21 @@ public class ParseIntoJs {
         invocable = (Invocable) engine;
     }
 
+    /**
+     * Gets the current invokable
+     * @return the Invocable
+     */
     public Invocable getInvocable(){
         return invocable;
     }
 
-
+    /**
+     * Parses a command and executes the js command from the JS file
+     * @param meth String
+     * @param sender Player
+     * @param args String[]
+     * @param cmd String
+     */
     public void JSParseCommand(String meth, Player sender, String[] args, String cmd){
 
         try {
@@ -85,6 +99,10 @@ public class ParseIntoJs {
 
     }
 
+    /**
+     * Parses a given event and executes the JS event
+     * @param event Event
+     */
     public void JSParseEvent(Event event){
 
         try {
