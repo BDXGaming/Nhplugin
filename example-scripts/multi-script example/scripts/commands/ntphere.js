@@ -37,3 +37,4 @@ function ntphere(sender, cmd, args, managerapi, event, nhplugin){
     }
 
 }
+}
