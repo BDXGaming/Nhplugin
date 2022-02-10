@@ -13,7 +13,7 @@ public class ReloadScriptsCommand implements CommandExecutor {
 
         if(sender.hasPermission("nh.reloadscripts")){
             ParseIntoJs.getInstance().reload();
-            sender.sendMessage(ChatColor.GREEN + "Scripts have been reloaded!");
+            sender.sendMessage(ChatColor.RED + "[Nhplugin] "+ChatColor.GREEN +"Scripts have been reloaded!");
         }
 
         return true;
