@@ -26,14 +26,17 @@ import javax.script.ScriptException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public final class Nhplugin extends JavaPlugin implements PluginMessageListener {
-    private static JavaPlugin instance;
+    private static Nhplugin instance;
     private DataQueue dataQueue;
     public static Chat chat;
     public static Managerapi managerapi;
     private NhpluginConfig nhpluginConfig;
     public static ConfigController configcontroller;
+    public RegisterCommand registerCommand;
+    public ArrayList<String> listenedEvents;
 
     public static void registerFakeCommand(Command whatCommand, Plugin plugin)
             throws ReflectiveOperationException {
@@ -68,6 +71,11 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
 
         //Creates the controller for all config values
         configcontroller = new ConfigController();
+
+        registerCommand = new RegisterCommand();
+
+        listenedEvents = new ArrayList<>();
+        //listenedEvents.add(PlayerChatEvent.class.getName());
 
         //Starts the scriptloader
         ParseIntoJs.getInstance();
@@ -161,6 +169,7 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
         return dataQueue;
     }
     public NhpluginConfig getConfigManger(){return nhpluginConfig; }
+    public RegisterCommand getRegisterCommand(){return registerCommand; }
 
 
 }
