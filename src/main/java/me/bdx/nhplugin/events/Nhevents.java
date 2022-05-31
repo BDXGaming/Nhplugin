@@ -36,6 +36,11 @@ public class Nhevents implements Listener {
 
     }
 
+    /**
+     * The main event handler. This handles all events registered in JS
+     * @param event The event
+     * @param <T> The class of the Event
+     */
     public static <T extends Event> void onEvent(T event){
         if(JavaPlugin.getPlugin(Nhplugin.class).listenedEvents.contains(event.getEventName())){
             ParseIntoJs.getInstance().JSParseEvent(event);
