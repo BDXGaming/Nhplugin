@@ -1,9 +1,11 @@
 package me.bdx.nhplugin.files;
 
 import me.bdx.nhplugin.Nhplugin;
+import me.bdx.nhplugin.events.ScriptLoadEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import javax.script.Invocable;
@@ -43,6 +45,10 @@ public class ParseIntoJs {
         engine = sef.getScriptEngine();
         try {
             engine.eval(new FileReader(Nhplugin.configcontroller.JS_ENTRY_FILE));
+            Bukkit.getScheduler().runTask(JavaPlugin.getPlugin(Nhplugin.class), () -> {
+                Bukkit.getServer().getPluginManager().callEvent(new ScriptLoadEvent());
+            });
+
         } catch (ScriptException | FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -66,6 +72,9 @@ public class ParseIntoJs {
         engine = sef.getScriptEngine();
         try {
             engine.eval(new FileReader(Nhplugin.configcontroller.JS_ENTRY_FILE));
+            Bukkit.getScheduler().runTask(JavaPlugin.getPlugin(Nhplugin.class), () -> {
+                Bukkit.getServer().getPluginManager().callEvent(new ScriptLoadEvent());
+            });
         } catch (ScriptException | FileNotFoundException e) {
             e.printStackTrace();
         }
