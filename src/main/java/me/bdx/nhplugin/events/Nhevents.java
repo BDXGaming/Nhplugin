@@ -27,7 +27,6 @@ public class Nhevents implements Listener {
         try{
             RegisteredListener registeredListener = new RegisteredListener(this, (listener, event) -> Nhevents.onEvent(event), EventPriority.NORMAL, Nhplugin.getInstance(), false);
             for (HandlerList handler : HandlerList.getHandlerLists()){
-                //Bukkit.getConsoleSender().sendMessage(String.valueOf(handler.getRegisteredListeners()));
                 handler.register(registeredListener);
             }
         }catch (IllegalPluginAccessException e){

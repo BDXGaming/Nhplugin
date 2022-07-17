@@ -170,6 +170,9 @@ public final class Nhplugin extends JavaPlugin implements PluginMessageListener 
     }
     public NhpluginConfig getConfigManger(){return nhpluginConfig; }
     public RegisterCommand getRegisterCommand(){return registerCommand; }
+    public ArrayList<String> getListenedEvents(){return listenedEvents; }
+    public void addListenedEvent(String event){listenedEvents.add(event);}
+    public void removeListenedEvent(String event){listenedEvents.remove(event);}
 
 
 }
