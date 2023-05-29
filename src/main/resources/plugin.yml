@@ -8,11 +8,6 @@ softdepend:
 
 commands:
 
-  js:
-    description: use one of the javascript commands
-    usage: /<command> <name> <args>
-    aliases: [javascript]
-
   dummycommand:
     description: Empty commands which can be listened for
     usage: /<command>

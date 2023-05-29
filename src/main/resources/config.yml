@@ -14,4 +14,4 @@ commandHandlerFileName: commandHandler.js
 
 # List of command names that are used by JS, add new names to support command-name tab completion
 commandNames:
-  - js
+  - jseval
