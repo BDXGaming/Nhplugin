@@ -6,7 +6,7 @@
 
     <groupId>me.bdx</groupId>
     <artifactId>nhplugin</artifactId>
-    <version>0.1</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>Nhplugin</name>
