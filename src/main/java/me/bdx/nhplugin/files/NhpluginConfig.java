@@ -22,7 +22,9 @@ public class NhpluginConfig {
     }
 
     public static void reload(){
-        File folder = new File(String.valueOf(Bukkit.getServer().getPluginManager().getPlugin("Managerapi").getDataFolder()));
+
+        File folder = new File(String.valueOf(Bukkit.getServer().getPluginManager().
+                getPlugin("Managerapi").getDataFolder()));
         File file = new File(folder, "config.yml");
         customfile = YamlConfiguration.loadConfiguration(file);
     }

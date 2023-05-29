@@ -99,7 +99,7 @@ public class ParseIntoJs {
     public void JSParseCommand(String meth, Player sender, String[] args, String cmd){
 
         try {
-            invocable.invokeFunction(meth, sender, meth, args, Nhplugin.chat, Nhplugin.managerapi, Nhplugin.getInstance());
+            invocable.invokeFunction(meth, sender, meth, args, Nhplugin.chat, Nhplugin.getInstance());
         } catch (ScriptException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
@@ -115,7 +115,7 @@ public class ParseIntoJs {
     public void JSParseEvent(Event event){
 
         try {
-            invocable.invokeFunction("onEvent", event, Nhplugin.managerapi, Nhplugin.getInstance());
+            invocable.invokeFunction("onEvent", event, Nhplugin.getInstance());
         } catch (ScriptException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {

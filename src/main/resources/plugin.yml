@@ -2,7 +2,9 @@ name: Nhplugin
 version: ${project.version}
 main: me.bdx.nhplugin.Nhplugin
 api-version: 1.16
-depend: [Vault, Managerapi]
+depend: [Vault]
+softdepend:
+  - Managerapi
 
 commands:
 
@@ -11,20 +13,11 @@ commands:
     usage: /<command> <name> <args>
     aliases: [javascript]
 
-  registercommand:
-    description: Register a command during runtime
-    usage: /<command> <name>
-    aliases: [rc]
-
   dummycommand:
     description: Empty commands which can be listened for
     usage: /<command>
     aliases:
       - testing
-      - ntp
-      - ntphere
-      - server
-      - send
 
   reloadscripts:
     description: Reloads the current scripts
