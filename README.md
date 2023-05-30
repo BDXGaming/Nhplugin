@@ -8,7 +8,7 @@ was to allow for the quick prototyping of commands in Javascript which could the
 The only config option is fileName, which is the entry file for JS. Using load() in the js files (supported by nashorn) multiple scripts can be used. 
 
 ## Dependencies
-Currently the plugin depends on Vault, ManagerAPI (Another of my plugins)
+Currently the plugin depends on Vault
 
 ## Future Support
 I do not have any fixed plans on supporting/improving this plugin. It is merely a project that I work on when I have free time.
